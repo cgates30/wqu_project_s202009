@@ -19,8 +19,12 @@ def get_geolocation(ip_address):
     response = requests.get(f'https://ipinfo.io/{ip_address}', headers=HEADERS)
     data = response.json()
     city = data['city']
+    region = data['region']
     coords = [float(coord) for coord in data['loc'].split(',')]
-
+    if region is None or city not in region:
+    	return coords, city
+    else:
+    	city = city + ", " + region
     return coords, city
 
 
