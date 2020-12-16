@@ -21,7 +21,7 @@ def get_geolocation(ip_address):
     city = data['city']
     region = data['region']
     coords = [float(coord) for coord in data['loc'].split(',')]
-    if region is None or city not in region:
+    if region is None or city in region:
     	return coords, city
     else:
     	city = city + ", " + region
